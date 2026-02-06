@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['Fredoka', 'Nunito', 'system-ui', 'sans-serif'],
+        body: ['Nunito', 'Comic Neue', 'system-ui', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,18 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Custom GorillaDo colors
+        gorilla: {
+          happy: "hsl(var(--gorilla-happy))",
+          neutral: "hsl(var(--gorilla-neutral))",
+          sad: "hsl(var(--gorilla-sad))",
+        },
+        xp: "hsl(var(--xp-bar))",
+        level: "hsl(var(--level-glow))",
+        boss: {
+          hp: "hsl(var(--boss-hp))",
+          damage: "hsl(var(--boss-damage))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +81,40 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "bounce-gentle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "flex-arms": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        "slouch": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "50%": { transform: "translateY(4px) rotate(-2deg)" },
+        },
+        "celebrate": {
+          "0%": { transform: "scale(1) rotate(0deg)" },
+          "25%": { transform: "scale(1.1) rotate(-5deg)" },
+          "50%": { transform: "scale(1.15) rotate(5deg)" },
+          "75%": { transform: "scale(1.1) rotate(-3deg)" },
+          "100%": { transform: "scale(1) rotate(0deg)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
+        "flex-arms": "flex-arms 1.5s ease-in-out infinite",
+        "slouch": "slouch 3s ease-in-out infinite",
+        "celebrate": "celebrate 0.6s ease-in-out",
       },
     },
   },
