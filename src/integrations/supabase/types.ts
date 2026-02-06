@@ -14,7 +14,211 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      badges: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      boss_fights: {
+        Row: {
+          boss_current_hp: number
+          boss_max_hp: number
+          boss_name: string
+          completed_at: string | null
+          ends_at: string
+          id: string
+          is_active: boolean
+          is_won: boolean | null
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          boss_current_hp?: number
+          boss_max_hp?: number
+          boss_name?: string
+          completed_at?: string | null
+          ends_at: string
+          id?: string
+          is_active?: boolean
+          is_won?: boolean | null
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          boss_current_hp?: number
+          boss_max_hp?: number
+          boss_name?: string
+          completed_at?: string | null
+          ends_at?: string
+          id?: string
+          is_active?: boolean
+          is_won?: boolean | null
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_streak: number
+          display_name: string | null
+          gorilla_mood: Database["public"]["Enums"]["gorilla_mood"]
+          id: string
+          last_task_completed_date: string | null
+          level: number
+          longest_streak: number
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          current_streak?: number
+          display_name?: string | null
+          gorilla_mood?: Database["public"]["Enums"]["gorilla_mood"]
+          id?: string
+          last_task_completed_date?: string | null
+          level?: number
+          longest_streak?: number
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          created_at?: string
+          current_streak?: number
+          display_name?: string | null
+          gorilla_mood?: Database["public"]["Enums"]["gorilla_mood"]
+          id?: string
+          last_task_completed_date?: string | null
+          level?: number
+          longest_streak?: number
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
+      task_completions: {
+        Row: {
+          completed_at: string
+          id: string
+          task_id: string
+          user_id: string
+          xp_earned: number
+        }
+        Insert: {
+          completed_at?: string
+          id?: string
+          task_id: string
+          user_id: string
+          xp_earned?: number
+        }
+        Update: {
+          completed_at?: string
+          id?: string
+          task_id?: string
+          user_id?: string
+          xp_earned?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_completions_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tasks: {
+        Row: {
+          created_at: string
+          deadline: string | null
+          description: string | null
+          difficulty: Database["public"]["Enums"]["task_difficulty"]
+          id: string
+          is_active: boolean
+          task_type: Database["public"]["Enums"]["task_type"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["task_difficulty"]
+          id?: string
+          is_active?: boolean
+          task_type?: Database["public"]["Enums"]["task_type"]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["task_difficulty"]
+          id?: string
+          is_active?: boolean
+          task_type?: Database["public"]["Enums"]["task_type"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +227,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      gorilla_mood: "happy" | "neutral" | "sad"
+      task_difficulty: "easy" | "medium" | "hard"
+      task_type: "daily" | "timeframe"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +356,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      gorilla_mood: ["happy", "neutral", "sad"],
+      task_difficulty: ["easy", "medium", "hard"],
+      task_type: ["daily", "timeframe"],
+    },
   },
 } as const
